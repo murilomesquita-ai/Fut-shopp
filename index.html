@@ -1,191 +1,1312 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Fut Shopp | Sua loja de futebol</title>
   <style>
-    :root { --navy:#102a43; --green:#087f5b; --lime:#d8f36b; --orange:#f05d23; --cream:#f8f6f0; --line:#dfe5df; }
-    * { box-sizing:border-box; margin:0; padding:0; }
-    body { background:var(--cream); color:var(--navy); font-family:Arial, sans-serif; }
-    a { color:inherit; text-decoration:none; }
-    button,input { font:inherit; }
-    button { cursor:pointer; }
-    .topbar { background:var(--navy); color:#fff; font-size:.75rem; padding:8px 6%; text-align:center; }
-    header { align-items:center; background:#fff; border-bottom:1px solid var(--line); display:flex; gap:34px; justify-content:space-between; padding:18px 6%; position:sticky; top:0; z-index:5; }
-    .logo { color:var(--green); font-family:Georgia,serif; font-size:1.7rem; font-weight:bold; white-space:nowrap; }
-    .logo span { color:var(--orange); }
-    nav { display:flex; gap:24px; font-size:.83rem; font-weight:bold; }
-    nav a:hover { color:var(--green); }
-    .header-actions { align-items:center; display:flex; gap:16px; }
-    .search { border:1px solid var(--line); padding:10px 12px; width:190px; }
-    .cart { background:var(--orange); border:0; color:#fff; font-size:.8rem; font-weight:bold; padding:11px 15px; }
-    .hero { align-items:center; background:linear-gradient(90deg,rgba(16,42,67,.93),rgba(16,42,67,.2)),url('https://images.unsplash.com/photo-1508098682722-e99c43a406b2?auto=format&fit=crop&w=1800&q=85') center/cover; color:#fff; display:flex; min-height:470px; padding:70px 9%; }
-    .hero-copy { max-width:580px; }
-    .eyebrow { color:var(--lime); font-size:.72rem; font-weight:bold; letter-spacing:2px; margin-bottom:16px; text-transform:uppercase; }
-    h1 { font-family:Georgia,serif; font-size:clamp(3rem,7vw,6.2rem); letter-spacing:-4px; line-height:.9; margin-bottom:20px; }
-    .hero p { font-size:1.08rem; line-height:1.6; max-width:430px; }
-    .primary { background:var(--orange); border:0; color:#fff; display:inline-block; font-size:.8rem; font-weight:bold; margin-top:25px; padding:15px 22px; text-transform:uppercase; }
-    .primary:hover,.cart:hover { background:#c94819; }
-    .benefits { background:var(--lime); display:grid; gap:16px; grid-template-columns:repeat(3,1fr); padding:17px 8%; }
-    .benefits div { align-items:center; display:flex; font-size:.78rem; font-weight:bold; gap:9px; justify-content:center; }
-    .benefits strong { font-size:1.3rem; }
-    .athletes { background:#102a43; color:#fff; display:grid; gap:14px; grid-template-columns:1.45fr 1fr 1fr; padding:65px 8%; }
-    .athlete-card { min-height:360px; overflow:hidden; position:relative; }
-    .athlete-card img { height:100%; object-fit:cover; width:100%; }
-    .athlete-card::after { background:linear-gradient(0deg,rgba(16,42,67,.92),transparent 65%); content:''; inset:0; position:absolute; }
-    .athlete-card.featured { min-height:470px; }
-    .athlete-info { bottom:22px; left:22px; position:absolute; right:22px; z-index:1; }
-    .athlete-info .eyebrow { margin-bottom:8px; }
-    .athlete-info h2 { color:#fff; font-size:2.4rem; margin-bottom:7px; }
-    .athlete-info p { color:#d8e1e5; font-size:.8rem; line-height:1.5; }
-    .jersey-badge { background:var(--orange); color:#fff; display:inline-block; font-size:.68rem; font-weight:bold; margin-top:12px; padding:8px 10px; text-transform:uppercase; }
-    .shirt-prop { background:var(--green); border:3px solid var(--lime); bottom:24px; color:#fff; font-family:Georgia,serif; font-size:1.15rem; font-weight:bold; padding:22px 12px; position:absolute; right:24px; text-align:center; transform:rotate(7deg); z-index:1; }
-    .shirt-prop small { display:block; font-family:Arial,sans-serif; font-size:.48rem; letter-spacing:1px; margin-top:5px; }
-    .editorial-note { background:#0b2033; color:#aebdc5; font-size:.65rem; grid-column:1/-1; padding-top:10px; }
-    main { margin:auto; max-width:1250px; padding:65px 6%; }
-    .section-head { align-items:end; display:flex; justify-content:space-between; margin-bottom:25px; }
-    h2 { font-family:Georgia,serif; font-size:2.6rem; letter-spacing:-1px; }
-    .section-head p { color:#63717a; font-size:.85rem; }
-    .departments { display:grid; gap:14px; grid-template-columns:repeat(4,1fr); margin-bottom:62px; }
-    .department { background:var(--navy); color:#fff; min-height:120px; padding:22px; position:relative; transition:transform .2s; }
-    .department:hover { background:var(--green); transform:translateY(-4px); }
-    .department strong { display:block; font-family:Georgia,serif; font-size:1.35rem; margin-bottom:8px; }
-    .department span { color:var(--lime); font-size:.72rem; }
-    .toolbar { align-items:center; border-bottom:1px solid var(--line); display:flex; flex-wrap:wrap; gap:9px; margin-bottom:28px; padding-bottom:13px; }
-    .filter { background:transparent; border:1px solid var(--line); color:var(--navy); font-size:.78rem; padding:9px 13px; }
-    .filter.active,.filter:hover { background:var(--navy); color:#fff; }
-    .toolbar .search { margin-left:auto; max-width:220px; }
-    .products { display:grid; gap:22px; grid-template-columns:repeat(4,1fr); }
-    .product { background:#fff; border:1px solid var(--line); display:flex; flex-direction:column; transition:.2s; }
-    .product:hover { box-shadow:5px 5px 0 var(--lime); transform:translateY(-4px); }
-    .product-image { height:220px; overflow:hidden; position:relative; }
-    .product-image img { height:100%; object-fit:cover; width:100%; }
-    .tag { background:var(--orange); color:#fff; font-size:.63rem; font-weight:bold; left:10px; padding:6px; position:absolute; text-transform:uppercase; top:10px; }
-    .product-info { display:flex; flex:1; flex-direction:column; padding:16px; }
-    .category { color:#77838a; font-size:.67rem; letter-spacing:1px; text-transform:uppercase; }
-    .product h3 { font-family:Georgia,serif; font-size:1.08rem; margin:8px 0 13px; }
-    .price { font-size:1.1rem; font-weight:bold; margin-bottom:15px; }
-    .add { background:var(--green); border:0; color:#fff; font-size:.73rem; font-weight:bold; margin-top:auto; padding:12px; text-transform:uppercase; }
-    .add:hover { background:var(--navy); }
-    .empty { color:#718096; grid-column:1/-1; padding:30px; text-align:center; }
-    .trust { background:#fff; border-top:1px solid var(--line); display:grid; gap:25px; grid-template-columns:repeat(3,1fr); padding:38px 8%; }
-    .trust h3 { font-family:Georgia,serif; font-size:1.1rem; margin-bottom:7px; }
-    .trust p { color:#687780; font-size:.8rem; line-height:1.5; }
-    footer { background:var(--navy); color:#fff; display:flex; justify-content:space-between; padding:32px 6%; }
-    footer p { color:#c1ccd2; font-size:.75rem; }
-    .drawer { background:#fff; box-shadow:-8px 0 25px #102a4330; display:flex; flex-direction:column; height:100%; max-width:390px; padding:26px; position:fixed; right:0; top:0; transform:translateX(105%); transition:transform .3s; width:90%; z-index:10; }
-    .drawer.open { transform:translateX(0); }
-    .drawer-head { align-items:center; border-bottom:1px solid var(--line); display:flex; justify-content:space-between; padding-bottom:17px; }
-    .drawer h2 { font-size:1.8rem; }
-    .close { background:none; border:0; font-size:1.6rem; }
-    .cart-items { flex:1; overflow:auto; padding:15px 0; }
-    .cart-row { align-items:center; border-bottom:1px solid var(--line); display:grid; gap:9px; grid-template-columns:58px 1fr auto; padding:12px 0; }
-    .cart-row img { height:58px; object-fit:cover; width:58px; }
-    .cart-row h3 { font-family:Georgia,serif; font-size:.88rem; }
-    .cart-row p { color:var(--green); font-size:.78rem; font-weight:bold; margin-top:5px; }
-    .quantity { align-items:center; display:flex; gap:7px; margin-top:7px; }
-    .quantity button { background:var(--cream); border:1px solid var(--line); height:22px; width:22px; }
-    .remove { background:none; border:0; color:#a34b3e; font-size:.65rem; }
-    .total { border-top:1px solid var(--line); font-size:1.1rem; font-weight:bold; padding-top:16px; }
-    .checkout { background:var(--green); border:0; color:#fff; font-size:.8rem; font-weight:bold; margin-top:15px; padding:14px; width:100%; }
-    .checkout-modal { background:#fff; box-shadow:0 18px 60px #102a4366; left:50%; max-height:90vh; max-width:620px; overflow:auto; padding:30px; position:fixed; top:50%; transform:translate(-50%,-45%); visibility:hidden; width:92%; z-index:12; }
-    .checkout-modal.open { transform:translate(-50%,-50%); visibility:visible; }
-    .checkout-modal::backdrop { background:#102a4399; }
-    .checkout-modal h2 { font-size:2rem; margin-bottom:7px; }
-    .checkout-intro { color:#687780; font-size:.82rem; margin-bottom:22px; }
-    .form-grid { display:grid; gap:14px; grid-template-columns:1fr 1fr; }
-    .field { display:flex; flex-direction:column; gap:6px; }
-    .field.full { grid-column:1/-1; }
-    .field label { font-size:.72rem; font-weight:bold; }
-    .field input,.field select { border:1px solid var(--line); color:var(--navy); padding:11px; width:100%; }
-    .payment-title { border-top:1px solid var(--line); font-size:.8rem; font-weight:bold; margin-top:22px; padding-top:18px; }
-    .payment-options { display:flex; gap:10px; margin-top:10px; }
-    .payment-options label { border:1px solid var(--line); flex:1; font-size:.75rem; padding:11px; }
-    .payment-options input { accent-color:var(--green); margin-right:5px; }
-    .checkout-summary { background:var(--cream); display:flex; font-size:.85rem; justify-content:space-between; margin-top:20px; padding:14px; }
-    .form-actions { display:flex; gap:10px; margin-top:18px; }
-    .form-actions button { border:0; padding:13px; width:50%; }
-    .cancel { background:var(--cream); color:var(--navy); }
-    .confirm { background:var(--green); color:#fff; font-weight:bold; }
-    .success { color:var(--green); display:none; font-size:1.1rem; line-height:1.5; padding:25px 0; text-align:center; }
-    .success.show { display:block; }
-    @media(max-width:850px) { nav { display:none; } .products { grid-template-columns:repeat(2,1fr); } .hero { min-height:420px; padding:65px 7%; } }
-    @media(max-width:560px) { header { gap:12px; padding:14px 4%; } .search { display:none; } .logo { font-size:1.35rem; } .hero { min-height:400px; } .benefits,.trust,.athletes { grid-template-columns:1fr; } .benefits div { justify-content:flex-start; } .departments { grid-template-columns:repeat(2,1fr); } .section-head { align-items:flex-start; flex-direction:column; gap:8px; } .toolbar { flex-wrap:wrap; } .toolbar .search { display:block; margin:0; max-width:none; order:-1; width:100%; } .products { grid-template-columns:1fr; } .athlete-card,.athlete-card.featured { min-height:360px; } footer { flex-direction:column; gap:10px; } }
+    :root {
+      --navy: #0b1220;
+      --navy-soft: #141d2d;
+      --green: #0f7d68;
+      --gold: #d9b06b;
+      --gold-soft: #f4dfb0;
+      --orange: #e06b2a;
+      --cream: #f4efe8;
+      --paper: #f9f6f2;
+      --line: rgba(11, 18, 32, 0.13);
+      --muted: #5d6776;
+      --white: #ffffff;
+      --shadow: 0 26px 70px rgba(11, 18, 32, 0.12);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: linear-gradient(180deg, #f7f3ee 0%, #f0ece4 100%);
+      color: var(--navy);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.5;
+    }
+    a { color: inherit; text-decoration: none; }
+    button, input, select { font: inherit; }
+    button { cursor: pointer; }
+
+    .topbar {
+      background: linear-gradient(90deg, var(--navy) 0%, #162238 100%);
+      color: var(--gold-soft);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      padding: 11px 20px;
+      text-align: center;
+      text-transform: uppercase;
+    }
+
+    header {
+      align-items: center;
+      background: rgba(11, 18, 32, 0.82);
+      border-bottom: 1px solid rgba(217, 176, 107, 0.2);
+      display: flex;
+      gap: 32px;
+      justify-content: space-between;
+      padding: 18px 6%;
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      backdrop-filter: blur(10px);
+    }
+
+    .logo {
+      color: var(--gold-soft);
+      font-family: Georgia, serif;
+      font-size: clamp(1.6rem, 2vw, 2rem);
+      font-weight: 700;
+      letter-spacing: -0.05em;
+      white-space: nowrap;
+    }
+    .logo span { color: var(--white); }
+
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 24px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+    nav a { color: rgba(255,255,255,0.8); opacity: 0.9; }
+    nav a:hover { color: var(--gold-soft); }
+
+    .header-actions {
+      align-items: center;
+      display: flex;
+      gap: 14px;
+    }
+
+    .search {
+      border: 1px solid var(--line);
+      background: var(--white);
+      color: var(--navy);
+      font-size: 0.9rem;
+      padding: 10px 12px;
+      width: 220px;
+    }
+    .search:focus {
+      outline: 2px solid rgba(13, 122, 91, 0.2);
+      border-color: var(--green);
+    }
+
+    .cart-btn, .primary-btn, .add-btn, .checkout-btn, .confirm-btn, .cancel-btn {
+      border: none;
+      transition: transform 0.2s ease, opacity 0.2s ease;
+    }
+
+    .cart-btn {
+      background: linear-gradient(135deg, var(--gold) 0%, #ba8a3e 100%);
+      color: var(--navy);
+      font-size: 0.82rem;
+      font-weight: 800;
+      padding: 12px 18px;
+      box-shadow: 0 12px 24px rgba(217, 176, 107, 0.25);
+    }
+    .cart-btn:hover, .primary-btn:hover, .add-btn:hover, .checkout-btn:hover, .confirm-btn:hover { transform: translateY(-1px); }
+
+    .hero {
+      align-items: center;
+      background: linear-gradient(90deg, rgba(7, 12, 23, 0.92), rgba(7, 12, 23, 0.42)), url('https://images.unsplash.com/photo-1508098682722-e99c43a406b2?auto=format&fit=crop&w=1800&q=85') center/cover no-repeat;
+      color: var(--white);
+      display: flex;
+      min-height: 500px;
+      padding: 70px 9%;
+      border-bottom: 1px solid rgba(217, 176, 107, 0.25);
+    }
+
+    .hero-copy { max-width: 560px; }
+    .eyebrow {
+      color: var(--gold-soft);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      margin-bottom: 18px;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      font-family: Georgia, serif;
+      font-size: clamp(3.1rem, 6vw, 6rem);
+      letter-spacing: -0.07em;
+      line-height: 0.9;
+      margin-bottom: 18px;
+      text-shadow: 0 10px 24px rgba(0,0,0,0.2);
+    }
+    h1 em { font-style: normal; }
+
+    .hero p {
+      color: rgba(255,255,255,0.9);
+      font-size: 1.06rem;
+      max-width: 460px;
+    }
+
+    .primary-btn {
+      background: linear-gradient(135deg, var(--gold) 0%, #ba8a3e 100%);
+      color: var(--navy);
+      display: inline-block;
+      font-size: 0.8rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      margin-top: 24px;
+      padding: 15px 22px;
+      text-transform: uppercase;
+      box-shadow: 0 14px 28px rgba(217, 176, 107, 0.25);
+    }
+
+    .benefits {
+      background: linear-gradient(180deg, #f0d59d 0%, #e7c07c 100%);
+      display: grid;
+      gap: 18px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      padding: 18px 8%;
+      border-bottom: 1px solid rgba(11, 18, 32, 0.08);
+    }
+    .benefits div {
+      align-items: center;
+      display: flex;
+      gap: 10px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      justify-content: center;
+    }
+    .benefits strong { font-size: 1.4rem; }
+
+    .campaign {
+      background: linear-gradient(180deg, #0d1624 0%, #111c2c 100%);
+      color: var(--white);
+      display: grid;
+      gap: 18px;
+      grid-template-columns: 1.5fr 1fr 1fr;
+      padding: 60px 8%;
+      border-bottom: 1px solid rgba(217, 176, 107, 0.18);
+    }
+
+    .feature-article {
+      min-height: 430px;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.06);
+      box-shadow: var(--shadow);
+    }
+    .feature-article img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .feature-article::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(16,42,67,0.1), rgba(16,42,67,0.88));
+    }
+    .feature-article.card-lg { min-height: 500px; }
+
+    .feature-info {
+      position: absolute;
+      left: 22px;
+      right: 22px;
+      bottom: 22px;
+      z-index: 1;
+    }
+    .feature-info h2 {
+      color: var(--white);
+      font-family: Georgia, serif;
+      font-size: clamp(2rem, 3vw, 2.6rem);
+      margin-bottom: 8px;
+      text-shadow: 0 8px 24px rgba(0,0,0,0.22);
+    }
+    .feature-info p {
+      color: rgba(255,255,255,0.82);
+      font-size: 0.82rem;
+    }
+    .tag-badge {
+      background: linear-gradient(135deg, var(--gold) 0%, #c58b40 100%);
+      color: var(--navy);
+      display: inline-block;
+      font-size: 0.68rem;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      margin-top: 12px;
+      padding: 8px 10px;
+      text-transform: uppercase;
+    }
+
+    .promo-badge {
+      position: absolute;
+      right: 22px;
+      bottom: 24px;
+      padding: 18px 12px;
+      background: linear-gradient(135deg, var(--green) 0%, #0b5d4d 100%);
+      border: 3px solid var(--gold-soft);
+      color: var(--white);
+      font-family: Georgia, serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      text-align: center;
+      transform: rotate(7deg);
+      z-index: 1;
+      box-shadow: 0 20px 35px rgba(0,0,0,0.18);
+    }
+    .promo-badge small {
+      display: block;
+      font-family: Arial, sans-serif;
+      font-size: 0.48rem;
+      letter-spacing: 0.08em;
+      margin-top: 6px;
+    }
+
+    .editorial-note {
+      background: #0e2438;
+      color: #b8c7d0;
+      font-size: 0.65rem;
+      grid-column: 1 / -1;
+      padding-top: 8px;
+    }
+
+    main {
+      margin: 0 auto;
+      max-width: 1250px;
+      padding: 64px 6%;
+    }
+
+    .section-head {
+      align-items: end;
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      margin-bottom: 24px;
+    }
+    .section-head h2 {
+      font-family: Georgia, serif;
+      font-size: clamp(2.3rem, 3vw, 3rem);
+      letter-spacing: -0.05em;
+    }
+    .section-head p {
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+
+    .categories {
+      display: grid;
+      gap: 14px;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      margin-bottom: 60px;
+    }
+
+    .category-card {
+      align-items: flex-start;
+      background: linear-gradient(180deg, #101b2b 0%, #162639 100%);
+      color: var(--white);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 130px;
+      padding: 20px 22px;
+      position: relative;
+      transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+      border: 1px solid rgba(217, 176, 107, 0.15);
+    }
+    .category-card:hover {
+      background: linear-gradient(180deg, #0f7d68 0%, #0d5f4d 100%);
+      transform: translateY(-4px);
+      box-shadow: 0 20px 28px rgba(15, 125, 104, 0.18);
+    }
+    .category-card strong {
+      display: block;
+      font-family: Georgia, serif;
+      font-size: 1.38rem;
+      margin-bottom: 8px;
+    }
+    .category-card span {
+      color: var(--lime);
+      font-size: 0.72rem;
+      text-transform: none;
+    }
+
+    .toolbar {
+      align-items: center;
+      border-bottom: 1px solid var(--line);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      margin-bottom: 28px;
+      padding-bottom: 12px;
+    }
+
+    .filter-btn {
+      background: rgba(255,255,255,0.55);
+      border: 1px solid var(--line);
+      color: var(--navy);
+      font-size: 0.78rem;
+      padding: 9px 13px;
+      transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+    }
+    .filter-btn.active, .filter-btn:hover {
+      background: linear-gradient(135deg, var(--navy) 0%, #1c2d44 100%);
+      border-color: rgba(217, 176, 107, 0.35);
+      color: var(--white);
+    }
+
+    .toolbar .search {
+      margin-left: auto;
+      width: 230px;
+    }
+
+    .products {
+      display: grid;
+      gap: 22px;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .product {
+      background: rgba(255,255,255,0.9);
+      border: 1px solid var(--line);
+      display: flex;
+      flex-direction: column;
+      min-height: 100%;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+      box-shadow: 0 12px 24px rgba(11, 18, 32, 0.04);
+    }
+    .product:hover {
+      box-shadow: 0 24px 36px rgba(11, 18, 32, 0.08);
+      border-color: rgba(217, 176, 107, 0.5);
+      transform: translateY(-4px);
+    }
+
+    .product-image {
+      height: 220px;
+      position: relative;
+      overflow: hidden;
+    }
+    .product-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .product-tag {
+      position: absolute;
+      left: 10px;
+      top: 10px;
+      background: linear-gradient(135deg, var(--gold) 0%, #c78c41 100%);
+      color: var(--navy);
+      font-size: 0.62rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      padding: 6px 8px;
+      text-transform: uppercase;
+    }
+
+    .product-info {
+      display: flex;
+      flex: 1;
+      flex-direction: column;
+      padding: 16px;
+    }
+    .category-name {
+      color: #74828c;
+      font-size: 0.66rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+    .product h3 {
+      font-family: Georgia, serif;
+      font-size: 1.08rem;
+      margin: 8px 0 12px;
+    }
+    .price {
+      font-size: 1.08rem;
+      font-weight: 700;
+      margin-bottom: 14px;
+    }
+    .add-btn {
+      background: linear-gradient(135deg, var(--green) 0%, #0b5c4f 100%);
+      color: var(--white);
+      font-size: 0.74rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      margin-top: auto;
+      padding: 12px;
+      text-transform: uppercase;
+    }
+
+    .empty-state {
+      color: var(--muted);
+      grid-column: 1 / -1;
+      padding: 30px;
+      text-align: center;
+    }
+
+    .trust {
+      background: linear-gradient(180deg, #ffffff 0%, #f4efe8 100%);
+      border-top: 1px solid var(--line);
+      display: grid;
+      gap: 26px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      padding: 38px 8%;
+    }
+    .trust h3 {
+      font-family: Georgia, serif;
+      font-size: 1.12rem;
+      margin-bottom: 8px;
+    }
+    .trust p {
+      color: var(--muted);
+      font-size: 0.82rem;
+      line-height: 1.6;
+    }
+
+    footer {
+      background: linear-gradient(180deg, #0b1220 0%, #111b2b 100%);
+      color: var(--white);
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 28px 6%;
+      border-top: 1px solid rgba(217, 176, 107, 0.15);
+    }
+    footer p {
+      color: rgba(255,255,255,0.75);
+      font-size: 0.76rem;
+    }
+
+    .drawer {
+      background: var(--white);
+      box-shadow: -8px 0 28px rgba(16, 42, 67, 0.22);
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      max-width: 390px;
+      padding: 24px 22px;
+      position: fixed;
+      right: 0;
+      top: 0;
+      transform: translateX(105%);
+      transition: transform 0.3s ease;
+      width: 90%;
+      z-index: 40;
+    }
+    .drawer.open { transform: translateX(0); }
+
+    .drawer-head {
+      align-items: center;
+      border-bottom: 1px solid var(--line);
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 12px;
+      padding-bottom: 16px;
+    }
+    .drawer-head h2 {
+      font-family: Georgia, serif;
+      font-size: 2rem;
+      letter-spacing: -0.04em;
+    }
+    .close-btn {
+      background: transparent;
+      border: none;
+      color: var(--navy);
+      font-size: 1.8rem;
+      line-height: 1;
+    }
+
+    .cart-items {
+      flex: 1;
+      overflow: auto;
+      padding: 8px 0 14px;
+    }
+
+    .cart-item {
+      align-items: center;
+      border-bottom: 1px solid var(--line);
+      display: grid;
+      gap: 10px;
+      grid-template-columns: 62px 1fr auto;
+      padding: 12px 0;
+    }
+    .cart-item img {
+      width: 62px;
+      height: 62px;
+      object-fit: cover;
+      display: block;
+    }
+    .cart-item h3 {
+      font-family: Georgia, serif;
+      font-size: 0.9rem;
+      margin-bottom: 4px;
+    }
+    .cart-item p {
+      color: var(--green);
+      font-size: 0.78rem;
+      font-weight: 700;
+    }
+    .quantity-controls {
+      align-items: center;
+      display: flex;
+      gap: 8px;
+      margin-top: 7px;
+    }
+    .quantity-controls button {
+      background: var(--cream);
+      border: 1px solid var(--line);
+      height: 22px;
+      width: 22px;
+    }
+    .remove-btn {
+      background: transparent;
+      border: none;
+      color: #a74c43;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+    }
+
+    .totals {
+      border-top: 1px solid var(--line);
+      font-size: 1.05rem;
+      font-weight: 700;
+      padding-top: 14px;
+    }
+    .checkout-btn {
+      background: var(--green);
+      color: var(--white);
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      margin-top: 14px;
+      padding: 13px 10px;
+      text-transform: uppercase;
+      width: 100%;
+    }
+
+    .checkout-modal {
+      background: var(--white);
+      box-shadow: 0 20px 60px rgba(16,42,67,0.35);
+      left: 50%;
+      max-height: 90vh;
+      max-width: 620px;
+      overflow: auto;
+      padding: 22px 24px 26px;
+      position: fixed;
+      top: 50%;
+      transform: translate(-50%, -45%);
+      visibility: hidden;
+      width: min(92vw, 620px);
+      z-index: 60;
+    }
+    .checkout-modal.open {
+      transform: translate(-50%, -50%);
+      visibility: visible;
+    }
+
+    .checkout-intro {
+      color: var(--muted);
+      font-size: 0.82rem;
+      margin: 18px 0 22px;
+    }
+
+    .form-grid {
+      display: grid;
+      gap: 14px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .field.full { grid-column: 1 / -1; }
+    .field label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    .field input, .field select {
+      border: 1px solid var(--line);
+      color: var(--navy);
+      padding: 11px 12px;
+      width: 100%;
+    }
+
+    .payment-title {
+      border-top: 1px solid var(--line);
+      font-size: 0.8rem;
+      font-weight: 700;
+      margin-top: 22px;
+      padding-top: 18px;
+      text-transform: uppercase;
+    }
+    .payment-options {
+      display: grid;
+      gap: 10px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      margin-top: 10px;
+    }
+    .payment-options label {
+      align-items: center;
+      border: 1px solid var(--line);
+      display: inline-flex;
+      flex: 1;
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 11px 10px;
+    }
+    .payment-options input { accent-color: var(--green); margin-right: 6px; }
+
+    .checkout-panel {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      margin-top: 20px;
+      padding: 18px 16px;
+    }
+    .panel-title {
+      font-size: 0.76rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      margin-bottom: 14px;
+      text-transform: uppercase;
+    }
+
+    .delivery-options {
+      display: grid;
+      gap: 10px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      margin-bottom: 16px;
+    }
+    .delivery-options label {
+      border: 1px solid var(--line);
+      display: block;
+      font-size: 0.72rem;
+      padding: 10px 8px;
+      text-align: center;
+    }
+    .delivery-options input { margin-right: 6px; }
+
+    .payment-form {
+      background: var(--white);
+      border: 1px solid var(--line);
+      display: none;
+      margin-top: 14px;
+      padding: 14px;
+    }
+    .payment-form.active { display: block; }
+
+    .checkout-summary {
+      background: var(--cream);
+      display: flex;
+      font-size: 0.85rem;
+      justify-content: space-between;
+      margin-top: 18px;
+      padding: 14px 16px;
+    }
+
+    .form-actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 18px;
+    }
+    .form-actions button {
+      border: none;
+      font-weight: 700;
+      padding: 13px 10px;
+      width: 50%;
+    }
+    .cancel-btn {
+      background: var(--cream);
+      color: var(--navy);
+    }
+    .confirm-btn {
+      background: var(--green);
+      color: var(--white);
+    }
+
+    .success-message {
+      color: var(--green);
+      display: none;
+      font-size: 1.08rem;
+      font-weight: 700;
+      line-height: 1.6;
+      padding: 24px 0 10px;
+      text-align: center;
+    }
+    .success-message.show { display: block; }
+
+    @media (max-width: 900px) {
+      nav { display: none; }
+      .products { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .categories { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .hero { min-height: 420px; }
+    }
+
+    @media (max-width: 560px) {
+      header { gap: 10px; padding: 14px 4%; }
+      .header-actions .search { display: none; }
+      .logo { font-size: 1.42rem; }
+      .hero { min-height: 360px; padding: 52px 6%; }
+      .benefits, .trust, .campaign { grid-template-columns: 1fr; }
+      .benefits div { justify-content: flex-start; }
+      .section-head { align-items: flex-start; flex-direction: column; }
+      .toolbar { align-items: stretch; }
+      .toolbar .search { margin-left: 0; width: 100%; }
+      .products { grid-template-columns: 1fr; }
+      .feature-article, .feature-article.card-lg { min-height: 340px; }
+      footer { flex-direction: column; }
+    }
   </style>
 </head>
 <body>
-  <div class="topbar">FRETE GRÁTIS NAS COMPRAS ACIMA DE R$ 299 · PAGAMENTO SEGURO</div>
+  <div class="topbar">Frete grátis acima de R$ 299 · pagamento seguro</div>
+
   <header>
     <a class="logo" href="#inicio">FUT <span>SHOPP</span></a>
-    <nav><a href="#inicio">Início</a><a href="#departamentos">Departamentos</a><a href="#produtos">Lançamentos</a><a href="#atendimento">Atendimento</a></nav>
-    <div class="header-actions"><input class="search" id="header-search" type="search" placeholder="Buscar produto..." aria-label="Buscar produto"><button class="cart" id="open-cart">🛒 Carrinho (<span id="cart-count">0</span>)</button></div>
+    <nav>
+      <a href="#inicio">Início</a>
+      <a href="#departamentos">Departamentos</a>
+      <a href="#produtos">Lançamentos</a>
+      <a href="#atendimento">Atendimento</a>
+    </nav>
+    <div class="header-actions">
+      <input class="search" id="header-search" type="search" placeholder="Buscar produto..." aria-label="Buscar produto" />
+      <button class="cart-btn" id="open-cart">🛒 Carrinho (<span id="cart-count">0</span>)</button>
+    </div>
   </header>
-  <section class="hero" id="inicio"><div class="hero-copy"><p class="eyebrow">A loja de quem vive o jogo</p><h1>JOGUE<br><em>BONITO.</em></h1><p>Equipamentos, camisas e acessórios escolhidos para você jogar com confiança dentro e fora do campo.</p><a class="primary" href="#produtos">Ver lançamentos →</a></div></section>
-  <div class="benefits"><div><strong>↗</strong> Frete grátis acima de R$ 299</div><div><strong>◷</strong> Envio em até 24 horas</div><div><strong>✓</strong> Troca fácil em 30 dias</div></div>
-  <section class="athletes" aria-label="Campanha Jogadores Fut Shopp"><article class="athlete-card featured"><img src="https://upload.wikimedia.org/wikipedia/commons/8/8c/Cristiano_Ronaldo_2018.jpg" alt="Cristiano Ronaldo em destaque na campanha editorial da Fut Shopp" loading="lazy"><div class="shirt-prop">FUT<br>SHOPP<small>CAMISA 2026</small></div><div class="athlete-info"><p class="eyebrow">Edição dos craques</p><h2>Cristiano Ronaldo</h2><p>O espírito de quem treina para fazer história. Vista a camisa Fut Shopp e leve essa atitude para o campo.</p><span class="jersey-badge">Camisa Fut Shopp · R$ 249,90</span></div></article><article class="athlete-card"><img src="https://images.unsplash.com/photo-1579952363873-27f3bade9f55?auto=format&fit=crop&w=900&q=85" alt="Jogador usando camisa de futebol" loading="lazy"><div class="athlete-info"><p class="eyebrow">Vista seu time</p><h2>Seu manto.</h2><p>Camisas para jogar com identidade.</p></div></article><article class="athlete-card"><img src="https://images.unsplash.com/photo-1511886929837-354d827aae26?auto=format&fit=crop&w=900&q=85" alt="Jogador em ação com chuteira de futebol" loading="lazy"><div class="athlete-info"><p class="eyebrow">Entre em campo</p><h2>Seu ritmo.</h2><p>Chuteiras para buscar o próximo gol.</p></div></article><p class="editorial-note">Imagem editorial de Cristiano Ronaldo. A campanha não representa patrocínio ou endosso oficial.</p></section>
+
+  <section class="hero" id="inicio">
+    <div class="hero-copy">
+      <p class="eyebrow">A loja de quem vive o jogo</p>
+      <h1>Jogue <em>bonito.</em></h1>
+      <p>Equipamentos, camisas e acessórios selecionados para você jogar com confiança dentro e fora do campo.</p>
+      <a class="primary-btn" href="#produtos">Ver lançamentos →</a>
+    </div>
+  </section>
+
+  <div class="benefits">
+    <div><strong>↗</strong> Frete grátis acima de R$ 299</div>
+    <div><strong>◷</strong> Envio em até 24 horas</div>
+    <div><strong>✓</strong> Troca fácil em 30 dias</div>
+  </div>
+
+  <section class="campaign" aria-label="Campanha editorial da Fut Shopp">
+    <article class="feature-article card-lg">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/8/8c/Cristiano_Ronaldo_2018.jpg" alt="Cristiano Ronaldo em destaque" loading="lazy" />
+      <div class="promo-badge">FUT<br />SHOPP<small>Camisa 2026</small></div>
+      <div class="feature-info">
+        <p class="eyebrow">Edição dos craques</p>
+        <h2>Cristiano Ronaldo</h2>
+        <p>O espírito de quem treina para fazer história. Vista a camisa Fut Shopp e leve essa atitude para o campo.</p>
+        <span class="tag-badge">Camisa Fut Shopp · R$ 249,90</span>
+      </div>
+    </article>
+
+    <article class="feature-article">
+      <img src="https://images.unsplash.com/photo-1579952363873-27f3bade9f55?auto=format&fit=crop&w=900&q=85" alt="Jogador usa camisa de futebol" loading="lazy" />
+      <div class="feature-info">
+        <p class="eyebrow">Vista seu time</p>
+        <h2>Seu manto</h2>
+        <p>Camisas para jogar com identidade.</p>
+      </div>
+    </article>
+
+    <article class="feature-article">
+      <img src="https://images.unsplash.com/photo-1511886929837-354d827aae26?auto=format&fit=crop&w=900&q=85" alt="Jogador em ação com chuteira de futebol" loading="lazy" />
+      <div class="feature-info">
+        <p class="eyebrow">Entre em campo</p>
+        <h2>Seu ritmo</h2>
+        <p>Chuteiras para buscar o próximo gol.</p>
+      </div>
+    </article>
+
+    <p class="editorial-note">Imagem editorial de Cristiano Ronaldo. A campanha não representa patrocínio ou endosso oficial.</p>
+  </section>
+
   <main>
-    <section id="departamentos"><div class="section-head"><div><p class="eyebrow" style="color:var(--green)">Compre por categoria</p><h2>Encontre seu jogo</h2></div><p>Do aquecimento ao apito final.</p></div><div class="departments"><a class="department" href="#produtos" data-department="camisas"><strong>Camisas</strong><span>Jogo e treino →</span></a><a class="department" href="#produtos" data-department="campo"><strong>Campo</strong><span>10 modelos →</span></a><a class="department" href="#produtos" data-department="society"><strong>Society</strong><span>5 modelos →</span></a><a class="department" href="#produtos" data-department="futsal"><strong>Futsal</strong><span>5 modelos →</span></a><a class="department" href="#produtos" data-department="goleiro"><strong>Goleiros</strong><span>Luvas e proteção →</span></a><a class="department" href="#produtos" data-department="treino"><strong>Treino</strong><span>Performance →</span></a><a class="department" href="#produtos" data-department="protecao"><strong>Proteção</strong><span>Caneleiras e meiões →</span></a><a class="department" href="#produtos" data-department="arbitragem"><strong>Arbitragem</strong><span>Apitos e cartões →</span></a></div></section>
-    <section id="produtos"><div class="section-head"><div><p class="eyebrow" style="color:var(--green)">Tudo para o futebol</p><h2>Catálogo completo</h2></div><p id="result-count"></p></div><div class="toolbar"><button class="filter active" data-filter="todos">Tudo</button><button class="filter" data-filter="camisas">Camisas</button><button class="filter" data-filter="campo">Campo (10)</button><button class="filter" data-filter="society">Society (5)</button><button class="filter" data-filter="futsal">Futsal (5)</button><button class="filter" data-filter="acessorios">Bolas</button><button class="filter" data-filter="goleiro">Goleiros</button><button class="filter" data-filter="treino">Treino</button><button class="filter" data-filter="protecao">Proteção</button><button class="filter" data-filter="arbitragem">Arbitragem</button><input class="search" id="search" type="search" placeholder="Buscar produto..." aria-label="Buscar produto"></div><div class="products" id="products"></div></section>
+    <section id="departamentos">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow" style="color: var(--green);">Compre por categoria</p>
+          <h2>Encontre seu jogo</h2>
+        </div>
+        <p>Do aquecimento ao apito final.</p>
+      </div>
+
+      <div class="categories">
+        <a class="category-card" href="#produtos" data-department="camisas"><strong>Camisas</strong><span>Jogo e treino →</span></a>
+        <a class="category-card" href="#produtos" data-department="campo"><strong>Campo</strong><span>10 modelos →</span></a>
+        <a class="category-card" href="#produtos" data-department="society"><strong>Society</strong><span>5 modelos →</span></a>
+        <a class="category-card" href="#produtos" data-department="futsal"><strong>Futsal</strong><span>5 modelos →</span></a>
+        <a class="category-card" href="#produtos" data-department="goleiro"><strong>Goleiros</strong><span>Luvas e proteção →</span></a>
+        <a class="category-card" href="#produtos" data-department="treino"><strong>Treino</strong><span>Performance →</span></a>
+        <a class="category-card" href="#produtos" data-department="protecao"><strong>Proteção</strong><span>Caneleiras e meiões →</span></a>
+        <a class="category-card" href="#produtos" data-department="arbitragem"><strong>Arbitragem</strong><span>Apitos e cartões →</span></a>
+      </div>
+    </section>
+
+    <section id="produtos">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow" style="color: var(--green);">Tudo para o futebol</p>
+          <h2>Catálogo completo</h2>
+        </div>
+        <p id="result-count">0 produtos encontrados</p>
+      </div>
+
+      <div class="toolbar">
+        <button class="filter-btn active" data-filter="todos">Tudo</button>
+        <button class="filter-btn" data-filter="camisas">Camisas</button>
+        <button class="filter-btn" data-filter="campo">Campo</button>
+        <button class="filter-btn" data-filter="society">Society</button>
+        <button class="filter-btn" data-filter="futsal">Futsal</button>
+        <button class="filter-btn" data-filter="acessorios">Bolas</button>
+        <button class="filter-btn" data-filter="goleiro">Goleiros</button>
+        <button class="filter-btn" data-filter="treino">Treino</button>
+        <button class="filter-btn" data-filter="protecao">Proteção</button>
+        <button class="filter-btn" data-filter="arbitragem">Arbitragem</button>
+        <input class="search" id="search" type="search" placeholder="Buscar produto..." aria-label="Buscar produto" />
+      </div>
+
+      <div class="products" id="products"></div>
+    </section>
   </main>
-  <section class="trust" id="atendimento"><div><h3>Compra segura</h3><p>Seus dados protegidos do começo ao fim da compra.</p></div><div><h3>Atendimento humano</h3><p>Fale com nosso time de segunda a sábado, das 9h às 18h.</p></div><div><h3>Troca sem complicação</h3><p>Você tem 30 dias para trocar seu produto com tranquilidade.</p></div></section>
-  <footer><p>© 2026 Fut Shopp. Feito para a próxima partida.</p><p>Instagram · WhatsApp · contato@futshopp.com</p></footer>
-  <aside class="drawer" id="drawer" aria-label="Carrinho de compras"><div class="drawer-head"><h2>Seu carrinho</h2><button class="close" id="close-cart" aria-label="Fechar carrinho">×</button></div><div class="cart-items" id="cart-items"></div><div class="total">Total: <span id="cart-total">R$ 0,00</span><button class="checkout" id="checkout">Finalizar pedido</button></div></aside>
-  <section class="checkout-modal" id="checkout-modal" role="dialog" aria-modal="true" aria-labelledby="checkout-title"><div class="drawer-head"><h2 id="checkout-title">Finalizar pedido</h2><button class="close" id="close-checkout" aria-label="Fechar finalização">×</button></div><p class="checkout-intro">Preencha seus dados para receber seu pedido com segurança.</p><form id="checkout-form"><div class="form-grid"><div class="field full"><label for="name">Nome completo</label><input id="name" name="name" required autocomplete="name" placeholder="Como devemos chamar você?"></div><div class="field"><label for="email">E-mail</label><input id="email" name="email" type="email" required autocomplete="email" placeholder="voce@email.com"></div><div class="field"><label for="phone">Celular</label><input id="phone" name="phone" required autocomplete="tel" placeholder="(00) 00000-0000"></div><div class="field"><label for="cep">CEP</label><input id="cep" name="cep" required inputmode="numeric" placeholder="00000-000"></div><div class="field"><label for="number">Número</label><input id="number" name="number" required inputmode="numeric" placeholder="123"></div><div class="field full"><label for="address">Endereço</label><input id="address" name="address" required autocomplete="street-address" placeholder="Rua, avenida ou estrada"></div><div class="field"><label for="city">Cidade</label><input id="city" name="city" required autocomplete="address-level2" placeholder="Sua cidade"></div><div class="field"><label for="state">Estado</label><select id="state" name="state" required><option value="">Selecione</option><option>SP</option><option>RJ</option><option>MG</option><option>PR</option><option>SC</option><option>RS</option><option>BA</option><option>Outro</option></select></div></div><p class="payment-title">Forma de pagamento</p><div class="payment-options"><label><input type="radio" name="payment" value="pix" required> Pix</label><label><input type="radio" name="payment" value="card"> Cartão</label><label><input type="radio" name="payment" value="boleto"> Boleto</label></div><div class="checkout-summary"><span>Valor do pedido</span><strong id="checkout-total">R$ 0,00</strong></div><div class="form-actions"><button class="cancel" type="button" id="cancel-checkout">Voltar ao carrinho</button><button class="confirm" type="submit">Confirmar pedido</button></div></form><div class="success" id="success-message">Pedido recebido com sucesso!<br><small>Enviaremos os detalhes para seu e-mail.</small></div></section>
+
+  <section class="trust" id="atendimento">
+    <div>
+      <h3>Compra segura</h3>
+      <p>Seus dados protegidos do começo ao fim da compra.</p>
+    </div>
+    <div>
+      <h3>Atendimento humano</h3>
+      <p>Fale com nosso time de segunda a sábado, das 9h às 18h.</p>
+    </div>
+    <div>
+      <h3>Troca sem complicação</h3>
+      <p>Você tem 30 dias para trocar seu produto com tranquilidade.</p>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2026 Fut Shopp. Feito para a próxima partida.</p>
+    <p>Instagram · WhatsApp · contato@futshopp.com</p>
+  </footer>
+
+  <aside class="drawer" id="drawer" aria-label="Carrinho de compras">
+    <div class="drawer-head">
+      <h2>Seu carrinho</h2>
+      <button class="close-btn" id="close-cart" aria-label="Fechar carrinho">×</button>
+    </div>
+    <div class="cart-items" id="cart-items"></div>
+    <div class="totals">
+      <span>Total: </span><span id="cart-total">R$ 0,00</span>
+      <button class="checkout-btn" id="checkout">Finalizar pedido</button>
+    </div>
+  </aside>
+
+  <section class="checkout-modal" id="checkout-modal" role="dialog" aria-modal="true" aria-labelledby="checkout-title">
+    <div class="drawer-head">
+      <h2 id="checkout-title">Finalizar pedido</h2>
+      <button class="close-btn" id="close-checkout" aria-label="Fechar finalização">×</button>
+    </div>
+
+    <p class="checkout-intro">Preencha seus dados para receber seu pedido com segurança.</p>
+
+    <form id="checkout-form">
+      <div class="checkout-panel">
+        <p class="panel-title">Dados do cliente</p>
+        <div class="form-grid">
+          <div class="field full">
+            <label for="name">Nome completo</label>
+            <input id="name" name="name" required autocomplete="name" placeholder="Como devemos chamar você?" />
+          </div>
+
+          <div class="field">
+            <label for="email">E-mail</label>
+            <input id="email" name="email" type="email" required autocomplete="email" placeholder="voce@email.com" />
+          </div>
+
+          <div class="field">
+            <label for="cpf">CPF</label>
+            <input id="cpf" name="cpf" required inputmode="numeric" placeholder="000.000.000-00" />
+          </div>
+
+          <div class="field">
+            <label for="phone">Celular</label>
+            <input id="phone" name="phone" required autocomplete="tel" placeholder="(00) 00000-0000" />
+          </div>
+        </div>
+      </div>
+
+      <div class="checkout-panel">
+        <p class="panel-title">Entrega</p>
+        <div class="delivery-options">
+          <label><input type="radio" name="shipping" value="padrao" checked /> Padrão</label>
+          <label><input type="radio" name="shipping" value="expresso" /> Expresso</label>
+          <label><input type="radio" name="shipping" value="retirada" /> Retirada</label>
+        </div>
+
+        <div class="form-grid">
+          <div class="field">
+            <label for="cep">CEP</label>
+            <input id="cep" name="cep" required inputmode="numeric" placeholder="00000-000" />
+          </div>
+
+          <div class="field">
+            <label for="number">Número</label>
+            <input id="number" name="number" required inputmode="numeric" placeholder="123" />
+          </div>
+
+          <div class="field full">
+            <label for="address">Endereço</label>
+            <input id="address" name="address" required autocomplete="street-address" placeholder="Rua, avenida ou estrada" />
+          </div>
+
+          <div class="field">
+            <label for="complement">Complemento</label>
+            <input id="complement" name="complement" placeholder="Apartamento, bloco, casa" />
+          </div>
+
+          <div class="field">
+            <label for="city">Cidade</label>
+            <input id="city" name="city" required autocomplete="address-level2" placeholder="Sua cidade" />
+          </div>
+
+          <div class="field">
+            <label for="state">Estado</label>
+            <select id="state" name="state" required>
+              <option value="">Selecione</option>
+              <option>SP</option>
+              <option>RJ</option>
+              <option>MG</option>
+              <option>PR</option>
+              <option>SC</option>
+              <option>RS</option>
+              <option>BA</option>
+              <option>Outro</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="checkout-panel">
+        <p class="panel-title">Pagamento</p>
+        <div class="payment-options">
+          <label><input type="radio" name="payment" value="pix" checked /> Pix</label>
+          <label><input type="radio" name="payment" value="cartao" /> Cartão</label>
+          <label><input type="radio" name="payment" value="boleto" /> Boleto</label>
+          <label><input type="radio" name="payment" value="transferencia" /> Transferência</label>
+        </div>
+
+        <div class="payment-form active" data-payment-form="pix">
+          <div class="form-grid">
+            <div class="field full">
+              <label for="pix-key">Chave Pix</label>
+              <input id="pix-key" name="pix-key" required placeholder="CPF, e-mail ou celular" />
+            </div>
+          </div>
+        </div>
+
+        <div class="payment-form" data-payment-form="cartao">
+          <div class="form-grid">
+            <div class="field full">
+              <label for="card-number">Número do cartão</label>
+              <input id="card-number" name="card-number" inputmode="numeric" placeholder="0000 0000 0000 0000" />
+            </div>
+            <div class="field">
+              <label for="card-name">Nome no cartão</label>
+              <input id="card-name" name="card-name" placeholder="Como está no cartão" />
+            </div>
+            <div class="field">
+              <label for="card-expiry">Validade</label>
+              <input id="card-expiry" name="card-expiry" inputmode="numeric" placeholder="MM/AA" />
+            </div>
+            <div class="field">
+              <label for="card-cvv">CVV</label>
+              <input id="card-cvv" name="card-cvv" inputmode="numeric" placeholder="123" />
+            </div>
+            <div class="field">
+              <label for="card-installments">Parcelas</label>
+              <select id="card-installments" name="card-installments">
+                <option value="">Selecione</option>
+                <option>1x sem juros</option>
+                <option>2x sem juros</option>
+                <option>3x sem juros</option>
+                <option>4x com juros</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="payment-form" data-payment-form="boleto">
+          <div class="form-grid">
+            <div class="field full">
+              <label for="boleto-cpf">CPF para emissão</label>
+              <input id="boleto-cpf" name="boleto-cpf" placeholder="000.000.000-00" />
+            </div>
+          </div>
+        </div>
+
+        <div class="payment-form" data-payment-form="transferencia">
+          <div class="form-grid">
+            <div class="field">
+              <label for="bank-name">Banco</label>
+              <input id="bank-name" name="bank-name" placeholder="Nome do banco" />
+            </div>
+            <div class="field">
+              <label for="bank-agency">Agência</label>
+              <input id="bank-agency" name="bank-agency" inputmode="numeric" placeholder="0000" />
+            </div>
+            <div class="field full">
+              <label for="bank-account">Conta</label>
+              <input id="bank-account" name="bank-account" inputmode="numeric" placeholder="00000000-0" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="checkout-summary">
+        <span>Valor total</span>
+        <strong id="checkout-total">R$ 0,00</strong>
+      </div>
+
+      <div class="form-actions">
+        <button type="button" class="cancel-btn" id="cancel-checkout">Cancelar</button>
+        <button type="submit" class="confirm-btn">Confirmar compra</button>
+      </div>
+
+      <p class="success-message" id="success-message">Pedido realizado com sucesso! Em breve você receberá a confirmação por e-mail.</p>
+    </form>
+  </section>
+
   <script>
     const products = [
-      { id:1, name:'Camisa Campo 2026', category:'camisas', label:'Camisas', price:249.90, image:'https://cdn.vnda.com.br/1500x/grandestorcidas/2026/04/27/18_41_42_926_img_1566-18046730.jpeg?v=1777326102', tag:'Novo' },
-      { id:2, name:'Camisa Treino Essential', category:'camisas', label:'Camisas', price:129.90, image:'https://cdn.vnda.com.br/1500x/grandestorcidas/2026/04/27/18_41_42_926_img_1566-18046730.jpeg?v=1777326102', tag:'' },
-      { id:3, name:'Chuteira Campo Pro', category:'campo', label:'Campo', price:459.90, image:'https://imgnike-a.akamaihd.net/1920x1920/096195MT.jpg' },
-      { id:4, name:'Chuteira Society Speed', category:'society', label:'Society', price:329.90, image:'https://tfdfjz.vteximg.com.br/arquivos/ids/314198/chuteira-society-nike-masculino-beco-2-cz0446-001-preto-cz0446-001-1.jpg?v=639071986180430000', tag:'Oferta' },
-      { id:5, name:'Bola Oficial trionda', category:'acessorios', label:'Bolas', price:159.90, image:'https://imgcentauro-a.akamaihd.net/1300x1300/99645101A2.jpg', tag:'Oferta' },
-      { id:6, name:'Chuteira Futsal Pro', category:'futsal', label:'Futsal', price:239.90, image:'https://static.santosstore.com.br/produtos/chuteira-futsal-umbro-pro-5-bump-unissex/38/2IA-2818-038/2IA-2818-038_zoom1.jpg?ts=1786030428&ims=544x', tag:'Novo' },
-      { id:17, name:'Chuteira Campo Elite FG', category:'campo', label:'Campo', price:549.90, image:'https://images.unsplash.com/photo-1511886929837-354d827aae26?auto=format&fit=crop&w=700&q=80', tag:'' },
-      { id:18, name:'Chuteira Campo Speed X', category:'campo', label:'Campo', price:399.90, image:'https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?auto=format&fit=crop&w=700&q=80', tag:'' },
-      { id:19, name:'Chuteira Campo Control', category:'campo', label:'Campo', price:429.90, image:'https://images.unsplash.com/photo-1511886929837-354d827aae26?auto=format&fit=crop&w=700&q=80', tag:'' },
-      { id:20, name:'Chuteira Campo Strike', category:'campo', label:'Campo', price:479.90, image:'https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?auto=format&fit=crop&w=700&q=80', tag:'' },
-      { id:21, name:'Chuteira Campo Classic', category:'campo', label:'Campo', price:299.90, image:'https://images.unsplash.com/photo-1511886929837-354d827aae26?auto=format&fit=crop&w=700&q=80', tag:'' },
-      { id:22, name:'Chuteira Campo Phantom', category:'campo', label:'Campo', price:599.90, image:'https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?auto=format&fit=crop&w=700&q=80', tag:'Premium' },
-      { id:23, name:'Chuteira Campo Future', category:'campo', label:'Campo', price:519.90, image:'https://images.unsplash.com/photo-1511886929837-354d827aae26?auto=format&fit=crop&w=700&q=80', tag:'' },
-      { id:24, name:'Chuteira Campo Grip', category:'campo', label:'Campo', price:369.90, image:'https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?auto=format&fit=crop&w=700&q=80', tag:'' },
-      { id:25, name:'Chuteira Campo Team', category:'campo', label:'Campo', price:279.90, image:'https://images.unsplash.com/photo-1511886929837-354d827aae26?auto=format&fit=crop&w=700&q=80', tag:'' },
-      { id:26, name:'Chuteira Society Control', category:'society', label:'Society', price:289.90, image:'https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?auto=format&fit=crop&w=700&q=80', tag:'' },
-      { id:27, name:'Chuteira Society Speed II', category:'society', label:'Society', price:349.90, image:'https://images.unsplash.com/photo-1511886929837-354d827aae26?auto=format&fit=crop&w=700&q=80', tag:'' },
-      { id:28, name:'Chuteira Society Street', category:'society', label:'Society', price:259.90, image:'https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?auto=format&fit=crop&w=700&q=80', tag:'Oferta' },
-      { id:29, name:'Chuteira Society Pro', category:'society', label:'Society', price:389.90, image:'https://images.unsplash.com/photo-1511886929837-354d827aae26?auto=format&fit=crop&w=700&q=80', tag:'' },
-      { id:30, name:'Chuteira Futsal Control', category:'futsal', label:'Futsal', price:279.90, image:'https://images.unsplash.com/photo-1553778263-73a83bab9b0c?auto=format&fit=crop&w=700&q=80', tag:'' },
-      { id:31, name:'Chuteira Futsal Speed', category:'futsal', label:'Futsal', price:319.90, image:'https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?auto=format&fit=crop&w=700&q=80', tag:'' },
-      { id:32, name:'Chuteira Futsal Street', category:'futsal', label:'Futsal', price:199.90, image:'https://images.unsplash.com/photo-1553778263-73a83bab9b0c?auto=format&fit=crop&w=700&q=80', tag:'Oferta' },
-      { id:33, name:'Chuteira Futsal Pro Indoor', category:'futsal', label:'Futsal', price:359.90, image:'https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?auto=format&fit=crop&w=700&q=80', tag:'' },
-      { id:7, name:'Luva de Goleiro Grip', category:'goleiro', label:'Goleiros', price:189.90, image:'https://images.unsplash.com/photo-1553778263-73a83bab9b0c?auto=format&fit=crop&w=700&q=80', tag:'' },
-      { id:8, name:'Joelheira de Goleiro', category:'goleiro', label:'Goleiros', price:119.90, image:'https://images.unsplash.com/photo-1579952363873-27f3bade9f55?auto=format&fit=crop&w=700&q=80', tag:'' },
-      { id:9, name:'Kit Caneleira Shield', category:'protecao', label:'Proteção', price:79.90, image:'https://images.unsplash.com/photo-1526232761682-d26e03ac148e?auto=format&fit=crop&w=700&q=80', tag:'Novo' },
-      { id:10, name:'Meião Esportivo Grip', category:'protecao', label:'Proteção', price:39.90, image:'https://images.unsplash.com/photo-1579952363873-27f3bade9f55?auto=format&fit=crop&w=700&q=80', tag:'' },
-      { id:11, name:'Conjunto de Agasalho', category:'treino', label:'Treino', price:279.90, image:'https://images.unsplash.com/photo-1526232761682-d26e03ac148e?auto=format&fit=crop&w=700&q=80', tag:'' },
-      { id:12, name:'Escada de Agilidade', category:'treino', label:'Treino', price:89.90, image:'https://images.unsplash.com/photo-1511886929837-354d827aae26?auto=format&fit=crop&w=700&q=80', tag:'' },
-      { id:13, name:'Apito Profissional', category:'arbitragem', label:'Arbitragem', price:49.90, image:'https://images.unsplash.com/photo-1579952363873-27f3bade9f55?auto=format&fit=crop&w=700&q=80', tag:'' },
-      { id:14, name:'Kit Cartões de Árbitro', category:'arbitragem', label:'Arbitragem', price:29.90, image:'https://images.unsplash.com/photo-1614632537190-23e4146777db?auto=format&fit=crop&w=700&q=80', tag:'' },
-      { id:15, name:'Rede para Gol Society', category:'acessorios', label:'Acessórios', price:229.90, image:'https://images.unsplash.com/photo-1508098682722-e99c43a406b2?auto=format&fit=crop&w=700&q=80', tag:'' },
-      { id:16, name:'Cone de Treino 23 cm', category:'treino', label:'Treino', price:14.90, image:'https://images.unsplash.com/photo-1511886929837-354d827aae26?auto=format&fit=crop&w=700&q=80', tag:'' }
+      { id: 1, name: 'Shappo CR7', category: 'acessorios', label: 'Acessórios', price: 67.67, image: 'https://assets.unileversolutions.com/v1/1663873.png', tag: 'Premium' },
+      { id: 2, name: 'Camisa do Brasil original 2026', category: 'camisas', label: 'Camisas', price: 749.9, image: 'https://cdn.vnda.com.br/1500x/grandestorcidas/2026/04/27/18_41_42_926_img_1566-18046730.jpeg?v=1777326102', tag: 'Novo' },
+      { id: 3, name: 'Camisa do Brasil olisinal', category: 'camisas', label: 'Camisas', price: 79.9, image: 'https://m.media-amazon.com/images/I/31cPEkL1cbL._AC_SY1000_.jpg', tag: '' },
+      { id: 4, name: 'Chuteira Campo Pro', category: 'campo', label: 'Campo', price: 459.9, image: 'https://imgnike-a.akamaihd.net/1920x1920/096195MT.jpg', tag: 'Top' },
+      { id: 5, name: 'Chuteira Society Speed', category: 'society', label: 'Society', price: 429.9, image: 'https://tfdfjz.vteximg.com.br/arquivos/ids/314198/chuteira-society-nike-masculino-beco-2-cz0446-001-preto-cz0446-001-1.jpg?v=639071986180430000', tag: 'Oferta' },
+      { id: 6, name: 'Bola Oficial Trionda', category: 'acessorios', label: 'Bolas', price: 859.9, image: 'https://imgcentauro-a.akamaihd.net/1300x1300/99645101A2.jpg', tag: 'Oferta' },
+      { id: 7, name: 'Chuteira Futsal Pro', category: 'futsal', label: 'Futsal', price: 339.9, image: 'https://static.santosstore.com.br/produtos/chuteira-futsal-umbro-pro-5-bump-unissex/38/2IA-2818-038/2IA-2818-038_zoom1.jpg?ts=1786030428&ims=544x', tag: 'Novo' },
+      { id: 8, name: 'Luva de Goleiro Grip', category: 'goleiro', label: 'Goleiros', price: 189.9, image: 'https://www.n1glovesbrasil.com.br/cdn/shop/files/Luva-de-Goleiro-Profissional-N1-Ares_72fde7b8.webp?v=1743700599', tag: '' },
+      { id: 9, name: 'Kit Caneleira Shield', category: 'goleiro', label: 'Goleiros', price: 119.9, image: 'https://bayard.vtexassets.com/arquivos/ids/3150194/015702-0007-A.jpg?v=638253703903530000', tag: '' },
+      { id: 10, name: 'Nike Mind 001 na cor Geode Tea', category: 'protecao', label: 'Proteção', price: 799.9, image: 'https://droper-lapse.us-southeast-1.linodeobjects.com/20260319144503206-620.webp', tag: 'Novo' },
+      { id: 11, name: 'Meião Esportivo Grip', category: 'protecao', label: 'Proteção', price: 39.9, image: 'https://images.tcdn.com.br/img/img_prod/1547633/meiao_de_futebol_adulto_cano_longo_11_1_cdffdb555d7f333d490aceda6f1630c0.jpg', tag: '' },
+      { id: 12, name: 'Escada de Agilidade', category: 'treino', label: 'Treino', price: 89.9, image: 'https://img.irroba.com.br/fit-in/600x600/filters:format(webp):fill(fff):quality(80)/equipame/catalog/protetor-barra-agachamento-academia-profissional/escada-de-agilidade-d-nq-np-614351-mlb32968520271-112019-f20191122172530.jpg', tag: '' },
+      { id: 13, name: 'Apito Profissional', category: 'treino', label: 'Treino', price: 89.9, image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZKOD2f75KHmft-jfyIVuH7hGg3MVw0J4K_mtFLu3yDw2uKV0jkzShHjPR&s=10', tag: '' },
+      { id: 14, name: 'Bandeirinha de Arbitro', category: 'arbitragem', label: 'Arbitragem', price: 89.9, image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPsseDYzku9dTrwdN-dZRNoJ3W_ajVvErkvhN6oc5wy5RTXvI4NvxmVnA&s=10', tag: '' },
+      { id: 15, name: 'Kit Cartões de Árbitro', category: 'arbitragem', label: 'Arbitragem', price: 29.9, image: 'https://decathlonstore.vtexassets.com/unsafe/fit-in/425x425/center/middle/filters:format(webp):quality(90)/https%3A%2F%2Fdecathlonpro.vtexassets.com%2Farquivos%2Fids%2F2922683%2F-cartao-de-campo-arbitro-poker-no-size1.jpg%3Fv%3D637698304241900000', tag: '' },
+      { id: 16, name: 'Rede para Gol Society', category: 'acessorios', label: 'Acessórios', price: 229.9, image: 'https://http2.mlstatic.com/D_NQ_NP_738654-MLB72510476873_102023-O-par-de-rede-para-gol-society-futebol-52x23m-quadra.webp', tag: '' },
+      { id: 17, name: 'Cone de Treino 23 cm', category: 'treino', label: 'Treino', price: 44.9, image: 'https://images.tcdn.com.br/img/img_prod/213069/kit_c_10_cones_de_treinamento_23_cm_12046_4_41d6f7138cb27d9fa4bf9bc55ab0c2e2.jpg', tag: '' },
+      { id: 18, name: 'Chuteira Campo Elite FG', category: 'campo', label: 'Campo', price: 549.9, image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBW735oTAvjotwCZX35jFQgFkcY_aphDruFNj5w8MhfJAmonwyMvoRRTnUJUB6TQoi3RSEs3wRV-Gy2qQoDDc1atV6JuQ4NA', tag: '' },
+      { id: 19, name: 'Chuteira Campo Speed X', category: 'campo', label: 'Campo', price: 599.9, image: 'https://lojaroyalsports.com.br/cdn/shop/products/b84291bc.jpg?v=1703241544&width=2048', tag: '' },
+      { id: 20, name: 'Chuteira Campo Control', category: 'campo', label: 'Campo', price: 429.9, image: 'https://static.netshoes.com.br/produtos/chuteira-de-campo-runway-max-control-texturizada-masculina/58/0KR-0108-058/0KR-0108-058_zoom1.jpg?ts=1704993477&ims=544x', tag: '' },
+      { id: 21, name: 'Chuteira Campo Theory', category: 'campo', label: 'Campo', price: 469.9, image: 'https://esportelegal.fbitsstatic.net/img/p/chuteira-campo-topper-strike-iv-105813/372494-1.jpg?w=800&h=800&v=no-value', tag: '' }
     ];
-    let cart=[]; let activeFilter='todos';
-    const money=value=>value.toLocaleString('pt-BR',{style:'currency',currency:'BRL'});
-    function renderProducts() { const term=document.getElementById('search').value.toLowerCase(); const visible=products.filter(p=>(activeFilter==='todos'||p.category===activeFilter)&&p.name.toLowerCase().includes(term)); document.getElementById('result-count').textContent=`${visible.length} produtos encontrados`; document.getElementById('products').innerHTML=visible.length?visible.map(p=>`<article class="product"><div class="product-image"><img src="${p.image}" alt="${p.name}" loading="lazy">${p.tag?`<span class="tag">${p.tag}</span>`:''}</div><div class="product-info"><span class="category">${p.label}</span><h3>${p.name}</h3><p class="price">${money(p.price)}</p><button class="add" data-id="${p.id}">Adicionar ao carrinho</button></div></article>`).join(''):'<p class="empty">Nenhum produto encontrado. Tente outra busca.</p>'; }
-    function renderCart() { const count=cart.reduce((sum,p)=>sum+p.quantity,0); const total=cart.reduce((sum,p)=>sum+p.price*p.quantity,0); document.getElementById('cart-count').textContent=count; document.getElementById('cart-total').textContent=money(total); document.getElementById('cart-items').innerHTML=cart.length?cart.map(p=>`<div class="cart-row"><img src="${p.image}" alt=""><div><h3>${p.name}</h3><p>${money(p.price)}</p><div class="quantity"><button data-action="decrease" data-id="${p.id}">−</button><span>${p.quantity}</span><button data-action="increase" data-id="${p.id}">+</button></div></div><button class="remove" data-action="remove" data-id="${p.id}">Remover</button></div>`).join(''):'<p class="empty">Seu carrinho está vazio.<br>Escolha algo para a próxima partida.</p>'; }
-    function setFilter(filter) { activeFilter=filter; document.querySelectorAll('.filter').forEach(b=>b.classList.toggle('active',b.dataset.filter===filter)); renderProducts(); }
-    document.getElementById('products').addEventListener('click',e=>{ if(!e.target.matches('.add'))return; const product=products.find(p=>p.id===Number(e.target.dataset.id)); const item=cart.find(p=>p.id===product.id); item?item.quantity++:cart.push({...product,quantity:1}); renderCart(); document.getElementById('drawer').classList.add('open'); });
-    document.getElementById('cart-items').addEventListener('click',e=>{ const item=cart.find(p=>p.id===Number(e.target.dataset.id)); if(!item)return; if(e.target.dataset.action==='increase')item.quantity++; if(e.target.dataset.action==='decrease')item.quantity--; if(e.target.dataset.action==='remove'||item.quantity<1)cart=cart.filter(p=>p.id!==item.id); renderCart(); });
-    document.querySelectorAll('.filter').forEach(b=>b.addEventListener('click',()=>setFilter(b.dataset.filter)));
-    document.querySelectorAll('[data-department]').forEach(a=>a.addEventListener('click',()=>setFilter(a.dataset.department)));
-    document.getElementById('search').addEventListener('input',renderProducts); document.getElementById('header-search').addEventListener('input',e=>{document.getElementById('search').value=e.target.value; renderProducts();});
-    document.getElementById('open-cart').addEventListener('click',()=>document.getElementById('drawer').classList.add('open')); document.getElementById('close-cart').addEventListener('click',()=>document.getElementById('drawer').classList.remove('open'));
-    const checkoutModal=document.getElementById('checkout-modal');
-    function openCheckout() { if(!cart.length){ alert('Adicione um produto ao carrinho primeiro.'); return; } document.getElementById('checkout-total').textContent=document.getElementById('cart-total').textContent; checkoutModal.classList.add('open'); }
-    function closeCheckout() { checkoutModal.classList.remove('open'); }
-    document.getElementById('checkout').addEventListener('click',openCheckout);
-    document.getElementById('close-checkout').addEventListener('click',closeCheckout); document.getElementById('cancel-checkout').addEventListener('click',closeCheckout);
-    document.getElementById('checkout-form').addEventListener('submit',event=>{ event.preventDefault(); document.getElementById('checkout-form').style.display='none'; document.getElementById('success-message').classList.add('show'); cart=[]; renderCart(); setTimeout(()=>{ closeCheckout(); document.getElementById('checkout-form').reset(); document.getElementById('checkout-form').style.display='block'; document.getElementById('success-message').classList.remove('show'); },3500); });
-    renderProducts(); renderCart();
+
+    let cart = [];
+    let activeFilter = 'todos';
+
+    const money = (value) => value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+
+    function renderProducts() {
+      const term = document.getElementById('search').value.toLowerCase();
+      const visible = products.filter((product) => {
+        const matchesFilter = activeFilter === 'todos' || product.category === activeFilter;
+        const matchesSearch = product.name.toLowerCase().includes(term);
+        return matchesFilter && matchesSearch;
+      });
+
+      const resultCount = document.getElementById('result-count');
+      resultCount.textContent = `${visible.length} produtos encontrados`;
+
+      const productsContainer = document.getElementById('products');
+      productsContainer.innerHTML = visible.length
+        ? visible.map((product) => `
+          <article class="product">
+            <div class="product-image">
+              <img src="${product.image}" alt="${product.name}" loading="lazy" />
+              ${product.tag ? `<span class="product-tag">${product.tag}</span>` : ''}
+            </div>
+            <div class="product-info">
+              <span class="category-name">${product.label}</span>
+              <h3>${product.name}</h3>
+              <p class="price">${money(product.price)}</p>
+              <button class="add-btn" data-id="${product.id}">Adicionar ao carrinho</button>
+            </div>
+          </article>
+        `).join('')
+        : '<p class="empty-state">Nenhum produto encontrado. Tente outra busca.</p>';
+    }
+
+    function renderCart() {
+      const count = cart.reduce((sum, item) => sum + item.quantity, 0);
+      const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+
+      document.getElementById('cart-count').textContent = count;
+      document.getElementById('cart-total').textContent = money(total);
+      document.getElementById('checkout-total').textContent = money(total);
+
+      const cartItems = document.getElementById('cart-items');
+      cartItems.innerHTML = cart.length
+        ? cart.map((item) => `
+          <div class="cart-item">
+            <img src="${item.image}" alt="${item.name}" />
+            <div>
+              <h3>${item.name}</h3>
+              <p>${money(item.price)}</p>
+              <div class="quantity-controls">
+                <button data-action="decrease" data-id="${item.id}" aria-label="Diminuir quantidade">−</button>
+                <span>${item.quantity}</span>
+                <button data-action="increase" data-id="${item.id}" aria-label="Aumentar quantidade">+</button>
+              </div>
+            </div>
+            <button class="remove-btn" data-action="remove" data-id="${item.id}">Remover</button>
+          </div>
+        `).join('')
+        : '<p class="empty-state">Seu carrinho está vazio.<br>Escolha algo para a próxima partida.</p>';
+    }
+
+    function setFilter(filter) {
+      activeFilter = filter;
+      document.querySelectorAll('.filter-btn').forEach((button) => {
+        button.classList.toggle('active', button.dataset.filter === filter);
+      });
+      renderProducts();
+    }
+
+    document.getElementById('products').addEventListener('click', (event) => {
+      const button = event.target.closest('.add-btn');
+      if (!button) return;
+
+      const productId = Number(button.dataset.id);
+      const product = products.find((item) => item.id === productId);
+      if (!product) return;
+
+      const itemInCart = cart.find((item) => item.id === productId);
+      if (itemInCart) {
+        itemInCart.quantity += 1;
+      } else {
+        cart.push({ ...product, quantity: 1 });
+      }
+
+      renderCart();
+      document.getElementById('drawer').classList.add('open');
+    });
+
+    document.getElementById('cart-items').addEventListener('click', (event) => {
+      const button = event.target.closest('button');
+      if (!button) return;
+
+      const productId = Number(button.dataset.id);
+      const item = cart.find((entry) => entry.id === productId);
+      if (!item) return;
+
+      if (button.dataset.action === 'increase') item.quantity += 1;
+      if (button.dataset.action === 'decrease') item.quantity -= 1;
+      if (button.dataset.action === 'remove' || item.quantity <= 0) {
+        cart = cart.filter((entry) => entry.id !== productId);
+      }
+
+      renderCart();
+    });
+
+    document.querySelectorAll('.filter-btn').forEach((button) => {
+      button.addEventListener('click', () => setFilter(button.dataset.filter));
+    });
+
+    document.querySelectorAll('[data-department]').forEach((link) => {
+      link.addEventListener('click', () => setFilter(link.dataset.department));
+    });
+
+    const searchInput = document.getElementById('search');
+    const headerSearchInput = document.getElementById('header-search');
+    searchInput.addEventListener('input', renderProducts);
+    headerSearchInput.addEventListener('input', (event) => {
+      searchInput.value = event.target.value;
+      renderProducts();
+    });
+
+    document.getElementById('open-cart').addEventListener('click', () => {
+      document.getElementById('drawer').classList.add('open');
+    });
+
+    document.getElementById('close-cart').addEventListener('click', () => {
+      document.getElementById('drawer').classList.remove('open');
+    });
+
+    const checkoutModal = document.getElementById('checkout-modal');
+    function openCheckout() {
+      if (!cart.length) {
+        alert('Adicione pelo menos um produto ao carrinho antes de finalizar.');
+        return;
+      }
+      document.getElementById('checkout-total').textContent = document.getElementById('cart-total').textContent;
+      checkoutModal.classList.add('open');
+    }
+
+    function closeCheckout() {
+      checkoutModal.classList.remove('open');
+    }
+
+    const paymentForms = document.querySelectorAll('.payment-form');
+    const paymentRadios = document.querySelectorAll('input[name="payment"]');
+
+    function updatePaymentForm() {
+      const selected = document.querySelector('input[name="payment"]:checked')?.value || 'pix';
+
+      paymentForms.forEach((form) => {
+        const isActive = form.dataset.paymentForm === selected;
+        form.classList.toggle('active', isActive);
+
+        form.querySelectorAll('input, select').forEach((field) => {
+          field.disabled = !isActive;
+          if (!isActive) {
+            field.required = false;
+          } else {
+            field.required = true;
+          }
+        });
+      });
+    }
+
+    paymentRadios.forEach((radio) => {
+      radio.addEventListener('change', updatePaymentForm);
+    });
+
+    document.getElementById('checkout').addEventListener('click', openCheckout);
+    document.getElementById('close-checkout').addEventListener('click', closeCheckout);
+    document.getElementById('cancel-checkout').addEventListener('click', closeCheckout);
+
+    document.getElementById('checkout-form').addEventListener('submit', (event) => {
+      event.preventDefault();
+
+      const form = event.currentTarget;
+      const success = document.getElementById('success-message');
+      form.style.display = 'none';
+      success.classList.add('show');
+
+      cart = [];
+      renderCart();
+
+      setTimeout(() => {
+        closeCheckout();
+        form.reset();
+        form.style.display = 'block';
+        success.classList.remove('show');
+        updatePaymentForm();
+      }, 3500);
+    });
+
+    updatePaymentForm();
+    renderProducts();
+    renderCart();
   </script>
 </body>
 </html>
