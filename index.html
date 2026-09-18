@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Fut Shopp | Sua loja de futebol</title>
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap');
+
     :root {
       --navy: #0b1220;
       --navy-soft: #141d2d;
@@ -603,6 +605,33 @@
       width: min(92vw, 620px);
       z-index: 60;
     }
+
+    .product-options-modal {
+      background: var(--white);
+      box-shadow: 0 20px 60px rgba(16,42,67,0.35);
+      left: 50%;
+      max-width: 460px;
+      padding: 22px 24px 26px;
+      position: fixed;
+      top: 50%;
+      transform: translate(-50%, -45%);
+      visibility: hidden;
+      width: min(92vw, 460px);
+      z-index: 60;
+    }
+    .product-options-modal.open {
+      transform: translate(-50%, -50%);
+      visibility: visible;
+    }
+    .options-intro {
+      color: var(--muted);
+      font-size: 0.82rem;
+      margin: 8px 0 20px;
+    }
+    .options-form {
+      display: grid;
+      gap: 14px;
+    }
     .checkout-modal.open {
       transform: translate(-50%, -50%);
       visibility: visible;
@@ -741,6 +770,276 @@
     }
     .success-message.show { display: block; }
 
+    /* Luxury visual direction */
+    :root {
+      --navy: #08111f;
+      --navy-soft: #102033;
+      --green: #157563;
+      --gold: #d6ae68;
+      --gold-soft: #f2d9a4;
+      --cream: #f6f1e9;
+      --paper: #fcfaf7;
+      --line: rgba(8, 17, 31, 0.12);
+      --muted: #69727f;
+      --shadow: 0 24px 60px rgba(8, 17, 31, 0.11);
+    }
+
+    body {
+      background-color: #f3eee6;
+      background-image: linear-gradient(135deg, rgba(255,255,255,0.62), transparent 42%), linear-gradient(180deg, #f8f5f0 0%, #eee8df 100%);
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    .topbar {
+      background: var(--navy);
+      border-bottom: 1px solid rgba(242, 217, 164, 0.18);
+      font-size: 0.64rem;
+      letter-spacing: 0.2em;
+      padding: 10px 20px;
+    }
+
+    header {
+      background: rgba(8, 17, 31, 0.92);
+      border-bottom-color: rgba(242, 217, 164, 0.24);
+      box-shadow: 0 8px 30px rgba(8, 17, 31, 0.12);
+      padding: 16px 6%;
+    }
+
+    .logo {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(1.7rem, 2.2vw, 2.15rem);
+      letter-spacing: -0.06em;
+    }
+
+    nav {
+      gap: 28px;
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+    }
+    nav a {
+      position: relative;
+      transition: color 0.2s ease;
+    }
+    nav a::after {
+      background: var(--gold);
+      bottom: -8px;
+      content: '';
+      height: 1px;
+      left: 0;
+      position: absolute;
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.2s ease;
+      width: 100%;
+    }
+    nav a:hover::after { transform: scaleX(1); }
+
+    .search {
+      background: rgba(255,255,255,0.96);
+      border: none;
+      border-radius: 2px;
+      box-shadow: inset 0 0 0 1px rgba(8,17,31,0.08);
+      font-size: 0.78rem;
+      padding: 11px 14px;
+    }
+
+    .cart-btn, .primary-btn, .add-btn, .checkout-btn, .confirm-btn, .cancel-btn {
+      border-radius: 2px;
+      letter-spacing: 0.12em;
+    }
+
+    .cart-btn {
+      background: var(--gold);
+      box-shadow: 0 10px 24px rgba(214, 174, 104, 0.2);
+      font-size: 0.68rem;
+      padding: 12px 16px;
+    }
+
+    .hero {
+      background-position: center 58%;
+      min-height: 610px;
+      padding: 90px 9%;
+      position: relative;
+    }
+    .hero::before {
+      border: 1px solid rgba(242,217,164,0.35);
+      content: '';
+      inset: 28px;
+      pointer-events: none;
+      position: absolute;
+    }
+    .hero-copy { position: relative; z-index: 1; }
+    .eyebrow {
+      font-size: 0.64rem;
+      letter-spacing: 0.22em;
+    }
+    h1 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(3.6rem, 7vw, 7.2rem);
+      font-weight: 600;
+      letter-spacing: -0.07em;
+      line-height: 0.88;
+    }
+    .hero p { font-size: 1rem; line-height: 1.8; }
+    .primary-btn {
+      background: var(--gold);
+      box-shadow: 0 16px 30px rgba(214,174,104,0.22);
+      font-size: 0.68rem;
+      padding: 16px 24px;
+    }
+
+    .benefits {
+      background: var(--gold);
+      gap: 0;
+      padding: 0 8%;
+    }
+    .benefits div {
+      border-right: 1px solid rgba(8,17,31,0.14);
+      font-size: 0.68rem;
+      letter-spacing: 0.05em;
+      min-height: 64px;
+      padding: 12px 20px;
+      text-transform: uppercase;
+    }
+    .benefits div:first-child { border-left: 1px solid rgba(8,17,31,0.14); }
+    .benefits strong { color: var(--navy); font-size: 1.25rem; }
+
+    .campaign {
+      background: var(--navy);
+      gap: 16px;
+      padding: 72px 8%;
+    }
+    .feature-article {
+      border-color: rgba(242,217,164,0.2);
+      box-shadow: 0 24px 50px rgba(0,0,0,0.22);
+    }
+    .feature-article img { transition: transform 0.7s ease; }
+    .feature-article:hover img { transform: scale(1.04); }
+    .feature-info h2, .section-head h2, .drawer-head h2 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-weight: 600;
+    }
+    .feature-info h2 { letter-spacing: -0.04em; }
+    .promo-badge { border-radius: 50%; }
+
+    main { max-width: 1340px; padding: 84px 6%; }
+    .section-head { margin-bottom: 30px; }
+    .section-head h2 {
+      font-size: clamp(2.4rem, 4vw, 3.6rem);
+      letter-spacing: -0.06em;
+    }
+    .section-head p { font-size: 0.78rem; }
+
+    .categories { gap: 12px; margin-bottom: 76px; }
+    .category-card {
+      background: linear-gradient(145deg, #102237, #091321);
+      border-color: rgba(214,174,104,0.22);
+      min-height: 148px;
+      overflow: hidden;
+      padding: 22px;
+    }
+    .category-card::after {
+      border: 1px solid rgba(214,174,104,0.18);
+      content: '';
+      inset: 8px;
+      pointer-events: none;
+      position: absolute;
+    }
+    .category-card:hover {
+      background: linear-gradient(145deg, #1c806e, #0e5046);
+      box-shadow: 0 18px 34px rgba(15,125,104,0.2);
+      transform: translateY(-5px);
+    }
+    .category-card strong {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.48rem;
+      position: relative;
+      z-index: 1;
+    }
+    .category-card span {
+      color: var(--gold-soft);
+      font-size: 0.65rem;
+      letter-spacing: 0.08em;
+      position: relative;
+      text-transform: uppercase;
+      z-index: 1;
+    }
+
+    .toolbar {
+      border-bottom-color: rgba(8,17,31,0.18);
+      gap: 8px;
+      margin-bottom: 32px;
+      padding-bottom: 16px;
+    }
+    .filter-btn {
+      border-radius: 999px;
+      font-size: 0.68rem;
+      letter-spacing: 0.06em;
+      padding: 9px 14px;
+    }
+    .filter-btn.active, .filter-btn:hover { background: var(--navy); }
+
+    .products { gap: 18px; }
+    .product {
+      background: rgba(255,255,255,0.78);
+      border-color: rgba(8,17,31,0.1);
+      border-radius: 2px;
+      box-shadow: 0 12px 28px rgba(8,17,31,0.045);
+      overflow: hidden;
+    }
+    .product:hover {
+      border-color: rgba(214,174,104,0.7);
+      box-shadow: 0 24px 42px rgba(8,17,31,0.12);
+    }
+    .product-image { background: #ece8e1; height: 242px; }
+    .product-image img { mix-blend-mode: multiply; transition: transform 0.5s ease; }
+    .product:hover .product-image img { transform: scale(1.05); }
+    .product-tag { border-radius: 1px; font-size: 0.58rem; }
+    .product-info { padding: 19px; }
+    .category-name { color: var(--green); font-size: 0.6rem; font-weight: 700; }
+    .product h3 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.12rem;
+      line-height: 1.25;
+    }
+    .price { color: var(--navy); font-size: 1.02rem; }
+    .add-btn {
+      background: var(--navy);
+      font-size: 0.65rem;
+      padding: 13px;
+    }
+    .add-btn:hover { background: var(--green); }
+
+    .trust {
+      background: var(--paper);
+      padding: 52px 8%;
+    }
+    .trust h3 { font-family: 'Playfair Display', Georgia, serif; font-size: 1.25rem; }
+    .trust p { font-size: 0.78rem; }
+    footer { background: var(--navy); padding: 34px 6%; }
+
+    .drawer {
+      box-shadow: -18px 0 55px rgba(8,17,31,0.24);
+      padding: 28px 24px;
+    }
+    .drawer-head h2 { font-size: 2.1rem; }
+    .checkout-modal, .product-options-modal {
+      border: 1px solid rgba(214,174,104,0.34);
+      box-shadow: 0 25px 80px rgba(8,17,31,0.3);
+    }
+    .field input, .field select { border-radius: 2px; }
+    .confirm-btn, .checkout-btn { background: var(--green); }
+
+    @media (max-width: 560px) {
+      .hero { min-height: 500px; padding: 68px 6%; }
+      .hero::before { inset: 16px; }
+      .benefits { padding: 0 6%; }
+      .benefits div { border-left: 1px solid rgba(8,17,31,0.14); justify-content: flex-start; }
+      main { padding: 64px 5%; }
+      .categories { margin-bottom: 56px; }
+      .product-image { height: 260px; }
+    }
+
     @media (max-width: 900px) {
       nav { display: none; }
       .products { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -761,6 +1060,242 @@
       .products { grid-template-columns: 1fr; }
       .feature-article, .feature-article.card-lg { min-height: 340px; }
       footer { flex-direction: column; }
+    }
+
+    /* Product showcase refinements */
+    body { letter-spacing: 0.012em; }
+    .logo, h1, .section-head h2, .feature-info h2, .drawer-head h2 { letter-spacing: -0.025em; }
+    .hero p, .section-head p, .trust p, footer p, .checkout-intro, .options-intro { letter-spacing: 0.025em; }
+    .product h3, .category-card strong, .trust h3 { letter-spacing: 0.012em; }
+    .product, .category-card, .filter-btn, .add-btn { will-change: transform; }
+
+    #produtos {
+      position: relative;
+    }
+    #produtos::before {
+      background: linear-gradient(90deg, var(--gold), transparent);
+      content: '';
+      height: 1px;
+      left: 6%;
+      opacity: 0.55;
+      position: absolute;
+      top: 28px;
+      width: 110px;
+    }
+    .toolbar {
+      background: rgba(255,255,255,0.34);
+      border: 1px solid rgba(8,17,31,0.08);
+      padding: 12px;
+    }
+    .filter-btn {
+      background: rgba(255,255,255,0.7);
+      transition: background 0.25s ease, border-color 0.25s ease, color 0.25s ease, transform 0.25s ease;
+    }
+    .filter-btn:hover { transform: translateY(-2px); }
+    .products { perspective: 1200px; }
+    .product {
+      animation: productReveal 0.65s both;
+      position: relative;
+    }
+    .product:nth-child(2) { animation-delay: 0.06s; }
+    .product:nth-child(3) { animation-delay: 0.12s; }
+    .product:nth-child(4) { animation-delay: 0.18s; }
+    .product:nth-child(5) { animation-delay: 0.24s; }
+    .product:nth-child(6) { animation-delay: 0.3s; }
+    .product:nth-child(7) { animation-delay: 0.36s; }
+    .product:nth-child(8) { animation-delay: 0.42s; }
+    .product::before {
+      background: linear-gradient(90deg, transparent, rgba(214,174,104,0.85), transparent);
+      content: '';
+      height: 1px;
+      left: 12%;
+      opacity: 0;
+      position: absolute;
+      top: 0;
+      transition: opacity 0.3s ease, left 0.3s ease, width 0.3s ease;
+      width: 76%;
+      z-index: 2;
+    }
+    .product:hover::before { left: 5%; opacity: 1; width: 90%; }
+    .product-image::after {
+      background: linear-gradient(110deg, transparent 25%, rgba(255,255,255,0.38) 48%, transparent 68%);
+      content: '';
+      inset: 0;
+      pointer-events: none;
+      position: absolute;
+      transform: translateX(-120%);
+    }
+    .product:hover .product-image::after { animation: productSheen 0.9s ease; }
+    .product-info { gap: 2px; }
+    .product h3 { min-height: 2.8em; }
+    .add-btn {
+      position: relative;
+      overflow: hidden;
+      transition: background 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+    }
+    .add-btn::after {
+      background: rgba(255,255,255,0.18);
+      content: '';
+      height: 100%;
+      left: -100%;
+      position: absolute;
+      top: 0;
+      transform: skewX(-18deg);
+      transition: left 0.45s ease;
+      width: 60%;
+    }
+    .add-btn:hover { box-shadow: 0 10px 22px rgba(8,17,31,0.18); transform: translateY(-2px); }
+    .add-btn:hover::after { left: 140%; }
+    .category-card { transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease; }
+    .category-card:hover { transform: translateY(-7px) scale(1.01); }
+
+    @keyframes productReveal {
+      from { opacity: 0; transform: translateY(18px) rotateX(3deg); }
+      to { opacity: 1; transform: translateY(0) rotateX(0); }
+    }
+    @keyframes productSheen {
+      from { transform: translateX(-120%); }
+      to { transform: translateX(120%); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: 0.01ms !important; }
+    }
+    @media (max-width: 560px) {
+      #produtos::before { left: 5%; top: 16px; }
+      .toolbar { padding: 10px; }
+      .product h3 { min-height: 0; }
+    }
+
+    /* Football-inspired catalog backdrop */
+    main {
+      background-color: #0a2b24;
+      background-image: linear-gradient(135deg, rgba(28, 107, 78, 0.42), transparent 34%), linear-gradient(180deg, #123d31 0%, #0a2b24 52%, #071d1a 100%);
+      max-width: none;
+      overflow: hidden;
+      padding-left: 6%;
+      padding-right: 6%;
+      position: relative;
+      isolation: isolate;
+    }
+    main::before,
+    main::after {
+      content: '';
+      pointer-events: none;
+      position: absolute;
+      z-index: -1;
+    }
+    main::before {
+      background-image: repeating-linear-gradient(90deg, transparent 0 118px, rgba(213, 237, 192, 0.045) 119px 120px);
+      inset: 0;
+      opacity: 0.5;
+    }
+    main::after {
+      border: 1px solid rgba(222, 239, 209, 0.12);
+      border-radius: 50%;
+      height: 720px;
+      left: 50%;
+      top: 33%;
+      transform: translateX(-50%);
+      width: 720px;
+    }
+    main > section {
+      margin-left: auto;
+      margin-right: auto;
+      max-width: 1220px;
+      position: relative;
+      z-index: 1;
+    }
+    main .section-head h2 { color: var(--white); }
+    main .section-head p { color: rgba(255,255,255,0.68); }
+    main .eyebrow { color: var(--gold-soft) !important; }
+    main .categories { margin-top: 8px; }
+    main .category-card {
+      background: linear-gradient(145deg, #1c6d55 0%, #0b382f 100%);
+      border-color: rgba(216, 185, 111, 0.34);
+      box-shadow: 0 16px 30px rgba(0,0,0,0.18);
+    }
+    main .category-card:hover {
+      background: linear-gradient(145deg, #258d6d 0%, #105547 100%);
+      box-shadow: 0 22px 38px rgba(0,0,0,0.26), 0 0 0 1px rgba(242,217,164,0.18);
+    }
+    main #produtos {
+      border-top: 1px solid rgba(242,217,164,0.22);
+      padding-top: 58px;
+    }
+    main #produtos::before { left: 0; top: 28px; }
+    main .toolbar {
+      background: rgba(4, 21, 18, 0.42);
+      border-color: rgba(242,217,164,0.2);
+    }
+    main .filter-btn {
+      background: rgba(247, 242, 231, 0.92);
+      border-color: rgba(242,217,164,0.3);
+    }
+    main .filter-btn.active,
+    main .filter-btn:hover {
+      background: var(--gold);
+      border-color: var(--gold);
+      color: var(--navy);
+    }
+    main .toolbar .search {
+      background: rgba(255,255,255,0.96);
+    }
+    .trust {
+      border-top-color: rgba(214,174,104,0.5);
+    }
+    @media (max-width: 560px) {
+      main { padding-left: 5%; padding-right: 5%; }
+      main::after { height: 440px; top: 38%; width: 440px; }
+      main #produtos { padding-top: 48px; }
+    }
+
+    /* Modern luxury typography */
+    body, button, input, select { font-family: 'Manrope', sans-serif; }
+    h1, h2, h3, .logo, .promo-badge, .feature-info h2, .section-head h2, .drawer-head h2,
+    .category-card strong, .product h3, .trust h3 {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+    }
+    h1 { letter-spacing: -0.015em; }
+    .logo { font-weight: 700; }
+    .promo-badge small { font-family: 'Manrope', sans-serif; }
+    .hero h1 { white-space: nowrap; }
+
+    /* Living product gallery backdrop */
+    main #produtos {
+      background-color: rgba(5, 24, 20, 0.52);
+      background-image: radial-gradient(circle at 12% 8%, rgba(214,174,104,0.2), transparent 24%), radial-gradient(circle at 88% 92%, rgba(32,145,108,0.2), transparent 28%), repeating-linear-gradient(135deg, rgba(255,255,255,0.025) 0 1px, transparent 1px 32px);
+      background-size: 150% 150%, 150% 150%, auto;
+      border: 1px solid rgba(242,217,164,0.24);
+      border-radius: 4px;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.08), 0 28px 60px rgba(0,0,0,0.2);
+      overflow: hidden;
+      padding-left: 28px;
+      padding-right: 28px;
+      animation: catalogGlow 16s ease-in-out infinite alternate;
+    }
+    main #produtos::after {
+      background: linear-gradient(115deg, transparent 15%, rgba(242,217,164,0.13) 48%, transparent 72%);
+      content: '';
+      inset: 0;
+      pointer-events: none;
+      position: absolute;
+      transform: translateX(-120%);
+      animation: gallerySheen 12s ease-in-out infinite;
+    }
+    main #produtos > * { position: relative; z-index: 1; }
+    @keyframes catalogGlow {
+      0% { background-position: 0% 0%, 100% 100%, 0 0; }
+      100% { background-position: 35% 25%, 65% 75%, 0 0; }
+    }
+    @keyframes gallerySheen {
+      0%, 68% { transform: translateX(-120%); }
+      88%, 100% { transform: translateX(120%); }
+    }
+    @media (max-width: 560px) {
+      main #produtos { padding-left: 14px; padding-right: 14px; }
+      .hero h1 { font-size: clamp(2.9rem, 14vw, 4.5rem); }
     }
   </style>
 </head>
@@ -1085,9 +1620,62 @@
     </form>
   </section>
 
+  <section class="product-options-modal" id="product-options-modal" role="dialog" aria-modal="true" aria-labelledby="options-title">
+    <div class="drawer-head">
+      <h2 id="options-title">Escolha suas opções</h2>
+      <button class="close-btn" id="close-options" aria-label="Fechar opções">×</button>
+    </div>
+    <p class="options-intro" id="options-product-name"></p>
+    <form class="options-form" id="product-options-form">
+      <div class="field">
+        <label for="product-size">Tamanho</label>
+        <select id="product-size" name="size" required>
+          <option value="">Selecione o tamanho</option>
+          <option value="28">28</option>
+          <option value="29">29</option>
+          <option value="30">30</option>
+          <option value="31">31</option>
+          <option value="32">32</option>
+          <option value="33">33</option>
+          <option value="34">34</option>
+          <option value="35">35</option>
+          <option value="36">36</option>
+          <option value="37">37</option>
+          <option value="38">38</option>
+          <option value="39">39</option>
+          <option value="40">40</option>
+          <option value="41">41</option>
+          <option value="42">42</option>
+          <option value="43">43</option>
+          <option value="44">44</option>
+          <option value="45">45</option>
+          <option value="46">46</option>
+          <option value="47">47</option>
+          <option value="48">48</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="product-color">Cor</label>
+        <select id="product-color" name="color" required>
+          <option value="">Selecione a cor</option>
+          <option>Preto</option>
+          <option>Branco</option>
+          <option>Azul</option>
+          <option>Vermelho</option>
+          <option>Verde</option>
+          <option>Amarelo</option>
+        </select>
+      </div>
+      <div class="form-actions">
+        <button type="button" class="cancel-btn" id="cancel-options">Cancelar</button>
+        <button type="submit" class="confirm-btn">Adicionar</button>
+      </div>
+    </form>
+  </section>
+
   <script>
     const products = [
-      { id: 1, name: 'Shappo CR7', category: 'acessorios', label: 'Acessórios', price: 67.67, image: 'https://assets.unileversolutions.com/v1/1663873.png', tag: 'Premium' },
+      { id: 1, name: 'Shappo CR7', category: 'acessorios', label: 'Acessórios', price: 67.99, image: 'https://assets.unileversolutions.com/v1/1663873.png', tag: 'Premium' },
       { id: 2, name: 'Camisa do Brasil original 2026', category: 'camisas', label: 'Camisas', price: 749.9, image: 'https://cdn.vnda.com.br/1500x/grandestorcidas/2026/04/27/18_41_42_926_img_1566-18046730.jpeg?v=1777326102', tag: 'Novo' },
       { id: 3, name: 'Camisa do Brasil olisinal', category: 'camisas', label: 'Camisas', price: 79.9, image: 'https://m.media-amazon.com/images/I/31cPEkL1cbL._AC_SY1000_.jpg', tag: '' },
       { id: 4, name: 'Chuteira Campo Pro', category: 'campo', label: 'Campo', price: 459.9, image: 'https://imgnike-a.akamaihd.net/1920x1920/096195MT.jpg', tag: 'Top' },
@@ -1112,8 +1700,10 @@
 
     let cart = [];
     let activeFilter = 'todos';
+    let selectedProduct = null;
 
     const money = (value) => value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+    const needsOptions = (product) => /chuteira|camisa|luva/i.test(product.name);
 
     function renderProducts() {
       const term = document.getElementById('search').value.toLowerCase();
@@ -1160,14 +1750,15 @@
             <img src="${item.image}" alt="${item.name}" />
             <div>
               <h3>${item.name}</h3>
+              ${item.size ? `<small>Tamanho ${item.size} · ${item.color}</small>` : ''}
               <p>${money(item.price)}</p>
               <div class="quantity-controls">
-                <button data-action="decrease" data-id="${item.id}" aria-label="Diminuir quantidade">−</button>
+                <button data-action="decrease" data-key="${item.key}" aria-label="Diminuir quantidade">−</button>
                 <span>${item.quantity}</span>
-                <button data-action="increase" data-id="${item.id}" aria-label="Aumentar quantidade">+</button>
+                <button data-action="increase" data-key="${item.key}" aria-label="Aumentar quantidade">+</button>
               </div>
             </div>
-            <button class="remove-btn" data-action="remove" data-id="${item.id}">Remover</button>
+            <button class="remove-btn" data-action="remove" data-key="${item.key}">Remover</button>
           </div>
         `).join('')
         : '<p class="empty-state">Seu carrinho está vazio.<br>Escolha algo para a próxima partida.</p>';
@@ -1189,23 +1780,60 @@
       const product = products.find((item) => item.id === productId);
       if (!product) return;
 
-      const itemInCart = cart.find((item) => item.id === productId);
+      if (needsOptions(product)) {
+        selectedProduct = product;
+        document.getElementById('options-product-name').textContent = product.name;
+        document.getElementById('product-options-form').reset();
+        document.getElementById('product-options-modal').classList.add('open');
+        document.getElementById('product-size').focus();
+        return;
+      }
+
+      const itemInCart = cart.find((item) => item.key === String(productId));
       if (itemInCart) {
         itemInCart.quantity += 1;
       } else {
-        cart.push({ ...product, quantity: 1 });
+        cart.push({ ...product, key: String(productId), quantity: 1 });
       }
 
       renderCart();
       document.getElementById('drawer').classList.add('open');
     });
 
+    const productOptionsModal = document.getElementById('product-options-modal');
+    function closeProductOptions() {
+      productOptionsModal.classList.remove('open');
+      selectedProduct = null;
+    }
+
+    document.getElementById('product-options-form').addEventListener('submit', (event) => {
+      event.preventDefault();
+      if (!selectedProduct) return;
+
+      const size = document.getElementById('product-size').value;
+      const color = document.getElementById('product-color').value;
+      const key = `${selectedProduct.id}-${size}-${color}`;
+      const itemInCart = cart.find((item) => item.key === key);
+
+      if (itemInCart) {
+        itemInCart.quantity += 1;
+      } else {
+        cart.push({ ...selectedProduct, key, size, color, quantity: 1 });
+      }
+
+      renderCart();
+      closeProductOptions();
+      document.getElementById('drawer').classList.add('open');
+    });
+
+    document.getElementById('close-options').addEventListener('click', closeProductOptions);
+    document.getElementById('cancel-options').addEventListener('click', closeProductOptions);
+
     document.getElementById('cart-items').addEventListener('click', (event) => {
       const button = event.target.closest('button');
       if (!button) return;
 
-      const productId = Number(button.dataset.id);
-      const item = cart.find((entry) => entry.id === productId);
+      const item = cart.find((entry) => entry.key === button.dataset.key);
       if (!item) return;
 
       if (button.dataset.action === 'increase') item.quantity += 1;
